@@ -2,7 +2,7 @@
   "name": "cursor-log-capture",
   "displayName": "Log Capture for AI",
   "description": "捕获程序运行日志，方便AI快速了解项目运行时异常和情况。支持 Cursor、Windsurf、VS Code 等编辑器。",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "publisher": "your-name",
   "engines": {
     "vscode": "^1.85.0"
@@ -116,6 +116,10 @@
       {
         "command": "apiTester.viewReports",
         "title": "API Tester: 📊 查看测试报告"
+      },
+      {
+        "command": "logCapture.checkForUpdates",
+        "title": "Log Capture: 🔄 检查更新"
       }
     ],
     "configuration": {

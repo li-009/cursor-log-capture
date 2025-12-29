@@ -5,12 +5,14 @@ import { LogViewProvider } from './logViewProvider';
 import { RuntimeContextCollector } from './runtimeContext';
 import { IdeaLogWatcher } from './ideaLogWatcher';
 import { ApiTestManager } from './apiTester';
+import { UpdateChecker } from './updateChecker';
 
 let logCapture: LogCapture;
 let logStorage: LogStorage;
 let runtimeContext: RuntimeContextCollector;
 let ideaLogWatcher: IdeaLogWatcher;
 let apiTestManager: ApiTestManager;
+let updateChecker: UpdateChecker;
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('Log Capture 插件已激活');
@@ -29,6 +31,14 @@ export function activate(context: vscode.ExtensionContext) {
     
     // 初始化 API 测试管理器
     apiTestManager = new ApiTestManager();
+    
+    // 初始化更新检查器
+    updateChecker = new UpdateChecker(context);
+    
+    // 启动时检查更新（静默模式）
+    if (updateChecker.shouldCheckUpdate()) {
+        updateChecker.checkForUpdates(true);
+    }
 
     // 注册视图提供者
     const logViewProvider = new LogViewProvider(logStorage);
@@ -198,6 +208,11 @@ export function activate(context: vscode.ExtensionContext) {
         // 查看测试报告
         vscode.commands.registerCommand('apiTester.viewReports', async () => {
             await apiTestManager.viewTestReports();
+        }),
+
+        // 检查更新
+        vscode.commands.registerCommand('logCapture.checkForUpdates', async () => {
+            await updateChecker.checkForUpdates(false);
         })
     ];
 
