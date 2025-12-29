@@ -4,11 +4,13 @@ import { LogStorage } from './logStorage';
 import { LogViewProvider } from './logViewProvider';
 import { RuntimeContextCollector } from './runtimeContext';
 import { IdeaLogWatcher } from './ideaLogWatcher';
+import { ApiTestManager } from './apiTester';
 
 let logCapture: LogCapture;
 let logStorage: LogStorage;
 let runtimeContext: RuntimeContextCollector;
 let ideaLogWatcher: IdeaLogWatcher;
+let apiTestManager: ApiTestManager;
 
 export function activate(context: vscode.ExtensionContext) {
     console.log('Log Capture 插件已激活');
@@ -24,6 +26,9 @@ export function activate(context: vscode.ExtensionContext) {
     
     // 初始化 IDEA 日志监控器
     ideaLogWatcher = new IdeaLogWatcher(logStorage);
+    
+    // 初始化 API 测试管理器
+    apiTestManager = new ApiTestManager();
 
     // 注册视图提供者
     const logViewProvider = new LogViewProvider(logStorage);
@@ -161,6 +166,38 @@ export function activate(context: vscode.ExtensionContext) {
         // 初始化项目：创建 AI 规则文件
         vscode.commands.registerCommand('logCapture.setupProject', async () => {
             await setupProjectForAI();
+        }),
+
+        // ========== API 测试功能 ==========
+        
+        // 配置测试环境
+        vscode.commands.registerCommand('apiTester.configure', async () => {
+            await apiTestManager.configure();
+        }),
+
+        // 测试当前 Controller
+        vscode.commands.registerCommand('apiTester.testCurrentController', async () => {
+            await apiTestManager.testCurrentController();
+        }),
+
+        // 测试选中的接口
+        vscode.commands.registerCommand('apiTester.testSelectedEndpoint', async () => {
+            await apiTestManager.testSelectedEndpoint();
+        }),
+
+        // 快速测试
+        vscode.commands.registerCommand('apiTester.quickTest', async () => {
+            await apiTestManager.quickTest();
+        }),
+
+        // 从图片识别测试
+        vscode.commands.registerCommand('apiTester.testFromImage', async () => {
+            await apiTestManager.testFromImage();
+        }),
+
+        // 查看测试报告
+        vscode.commands.registerCommand('apiTester.viewReports', async () => {
+            await apiTestManager.viewTestReports();
         })
     ];
 

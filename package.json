@@ -2,7 +2,7 @@
   "name": "cursor-log-capture",
   "displayName": "Log Capture for AI",
   "description": "捕获程序运行日志，方便AI快速了解项目运行时异常和情况。支持 Cursor、Windsurf、VS Code 等编辑器。",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "publisher": "your-name",
   "engines": {
     "vscode": "^1.85.0"
@@ -13,8 +13,13 @@
     "ai",
     "log",
     "debug",
-    "runtime"
+    "runtime",
+    "api-test"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/li-009/cursor-log-capture.git"
+  },
   "categories": [
     "Other"
   ],
@@ -87,6 +92,30 @@
       {
         "command": "logCapture.setupProject",
         "title": "Log Capture: ⚙️ 配置项目（让AI自动读取日志）"
+      },
+      {
+        "command": "apiTester.configure",
+        "title": "API Tester: ⚙️ 配置测试环境（URL/Token）"
+      },
+      {
+        "command": "apiTester.testCurrentController",
+        "title": "API Tester: 🧪 测试当前Controller"
+      },
+      {
+        "command": "apiTester.testSelectedEndpoint",
+        "title": "API Tester: 🎯 测试选中的接口"
+      },
+      {
+        "command": "apiTester.quickTest",
+        "title": "API Tester: ⚡ 快速测试（仅功能测试）"
+      },
+      {
+        "command": "apiTester.testFromImage",
+        "title": "API Tester: 📷 从图片识别接口参数"
+      },
+      {
+        "command": "apiTester.viewReports",
+        "title": "API Tester: 📊 查看测试报告"
       }
     ],
     "configuration": {
