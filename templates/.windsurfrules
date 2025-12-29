@@ -1,0 +1,14 @@
+# 项目运行日志配置
+
+## 日志文件位置
+当需要了解程序运行时的情况时，请查看以下文件：
+
+1. **运行时上下文**: `.cursor-logs/runtime-context.md` - 包含启动参数、依赖、配置等
+2. **完整日志**: `.cursor-logs/runtime.log` - 所有运行日志
+3. **错误日志**: `.cursor-logs/runtime.errors.log` - 只有错误和异常
+
+## 使用方法
+- 如果用户提到"程序报错"、"运行出错"、"有bug"等，请先读取 `.cursor-logs/runtime.errors.log`
+- 如果需要了解完整运行流程，读取 `.cursor-logs/runtime.log`
+- 如果需要了解项目配置和环境，读取 `.cursor-logs/runtime-context.md`
+

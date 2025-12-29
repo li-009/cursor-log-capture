@@ -1,0 +1,146 @@
+{
+  "name": "cursor-log-capture",
+  "displayName": "Log Capture for AI",
+  "description": "捕获程序运行日志，方便AI快速了解项目运行时异常和情况。支持 Cursor、Windsurf、VS Code 等编辑器。",
+  "version": "1.0.1",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "keywords": [
+    "cursor",
+    "windsurf",
+    "ai",
+    "log",
+    "debug",
+    "runtime"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "logCapture.startCapture",
+        "title": "Log Capture: 开始捕获日志"
+      },
+      {
+        "command": "logCapture.stopCapture",
+        "title": "Log Capture: 停止捕获日志"
+      },
+      {
+        "command": "logCapture.viewLogs",
+        "title": "Log Capture: 查看日志"
+      },
+      {
+        "command": "logCapture.viewErrors",
+        "title": "Log Capture: 只看错误日志"
+      },
+      {
+        "command": "logCapture.clearLogs",
+        "title": "Log Capture: 清空日志"
+      },
+      {
+        "command": "logCapture.copyLogsToClipboard",
+        "title": "Log Capture: 复制日志到剪贴板（供AI使用）"
+      },
+      {
+        "command": "logCapture.copyErrorsToClipboard",
+        "title": "Log Capture: 复制错误日志到剪贴板（供AI使用）"
+      },
+      {
+        "command": "logCapture.collectContext",
+        "title": "Log Capture: 收集运行时上下文"
+      },
+      {
+        "command": "logCapture.copyFullContextToClipboard",
+        "title": "Log Capture: 复制完整上下文给AI（包含参数、配置、日志）"
+      },
+      {
+        "command": "logCapture.runAndCapture",
+        "title": "Log Capture: 运行命令并捕获日志"
+      },
+      {
+        "command": "logCapture.watchIdeaLogs",
+        "title": "Log Capture: 🔴 监控IDEA日志文件"
+      },
+      {
+        "command": "logCapture.stopWatchingIdeaLogs",
+        "title": "Log Capture: ⏹️ 停止监控IDEA日志"
+      },
+      {
+        "command": "logCapture.addLogFile",
+        "title": "Log Capture: ➕ 添加自定义日志文件"
+      },
+      {
+        "command": "logCapture.importFromClipboard",
+        "title": "Log Capture: 📋 从剪贴板导入日志（从IDEA复制）"
+      },
+      {
+        "command": "logCapture.showWatchedFiles",
+        "title": "Log Capture: 📁 查看监控的文件列表"
+      },
+      {
+        "command": "logCapture.setupProject",
+        "title": "Log Capture: ⚙️ 配置项目（让AI自动读取日志）"
+      }
+    ],
+    "configuration": {
+      "title": "Log Capture",
+      "properties": {
+        "logCapture.maxLogLines": {
+          "type": "number",
+          "default": 1000,
+          "description": "最大保存日志行数"
+        },
+        "logCapture.autoCapture": {
+          "type": "boolean",
+          "default": true,
+          "description": "启动时自动开始捕获"
+        },
+        "logCapture.logFilePath": {
+          "type": "string",
+          "default": ".cursor-logs/runtime.log",
+          "description": "日志文件保存路径（相对于工作区）"
+        },
+        "logCapture.capturePatterns": {
+          "type": "array",
+          "default": ["error", "exception", "warn", "fail", "crash"],
+          "description": "需要特别标记的关键词（不区分大小写）"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "logCapture",
+          "title": "运行日志",
+          "icon": "$(output)"
+        }
+      ]
+    },
+    "views": {
+      "logCapture": [
+        {
+          "id": "logCaptureView",
+          "name": "运行日志"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}

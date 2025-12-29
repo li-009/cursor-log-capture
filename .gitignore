@@ -1,0 +1,9 @@
+out/
+node_modules/
+.vscode-test/
+*.vsix
+.cursor-logs/
+.DS_Store
+*.log
+.idea/
+
